@@ -1,4 +1,4 @@
-var movingrect,fixedrect
+var movingrect,fixedrect,rect;
 
 function setup() {
   createCanvas(800,400);
@@ -8,26 +8,46 @@ function setup() {
   fixedrect=createSprite(400, 100, 50, 50);
   fixedrect.shapeColor = "red"
 
+  rect=createSprite(100, 100, 50, 70);
+  rect.shapeColor = "red"
+
+
 
 }
+
 
 function draw() {
-  background(255,255,255);
+  background(155,125,7);
   movingrect.x = mouseX;
   movingrect.y = mouseY;
+ if( istouching(movingrect,fixedrect)){
+ movingrect.shapeColor = "yellow"
+ fixedrect.shapeColor = "yellow"
+ }
+else{
+ movingrect.shapeColor = "red"
+ fixedrect.shapeColor = "red"
+}
 
-if(movingrect.x-fixedrect.x<=(movingrect.width/2+fixedrect.width/2)&&
-fixedrect.x-movingrect.x<=(movingrect.width/2+fixedrect.width/2)&&
-movingrect.y-fixedrect.y<=(movingrect.height/2+fixedrect.height/2)&&
-fixedrect.y-movingrect.y<=(movingrect.height/2+fixedrect.height/2)
+ drawSprites();
+}
+
+function istouching(object1,object2){
+  
+  
+if(object1.x-object2.x<=(object1.width/2+object2.width/2)&&
+object2.x-object1.x<=(object1.width/2+object2.width/2)&&
+object1.y-object2.y<=(object1.height/2+object2.height/2)&&
+object2.y-object1.y<=(object1.height/2+object2.height/2)
 ){
-  fixedrect.shapeColor = "yellow"
-  movingrect.shapeColor = "yellow"
+  return true;
 }
 else{
-  fixedrect.shapeColor = "red"
-  movingrect.shapeColor = "red" 
+  return false;
 }
 
-  drawSprites();
+  
 }
+
+
+
